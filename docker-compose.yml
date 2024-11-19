@@ -1,0 +1,16 @@
+services:
+  nginx:
+    image: nginx
+    container_name: nginx-myapp
+    #restart: always
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+
+# Use the same external network in $upstream containers.
+networks:
+  default:
+    name: www-network
+    external: true
